@@ -83,6 +83,8 @@
 
 // Damages the component. Contains necessary checks. Negative damage "heals" the component.
 /obj/item/weapon/computer_hardware/take_damage(var/amount)
+	if(istype(holder2) && !holder2.damageable)
+		return
 	damage += round(amount) 					// We want nice rounded numbers here.
 	damage = between(0, damage, max_damage)		// Clamp the value.
 

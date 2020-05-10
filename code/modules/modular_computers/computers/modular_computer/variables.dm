@@ -4,6 +4,8 @@
 	name = "Modular Computer"
 	desc = "A modular computer. You shouldn't see this."
 
+	var/requires_power = TRUE								// Whether this device requires power. If FALSE all power interaction is disabled and device will behave as if it had APC power
+	var/modifiable = TRUE									// Whether this device can be modified. If FALSE all hardware install/uninstallations will not be available. Device will also not be deconstructable. Recommended to be paired with damageable = FALSE as hardware can not be fixed
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
@@ -35,6 +37,7 @@
 	var/list/idle_threads = list()							// Idle programs on background. They still receive process calls but can't be interacted with.
 
 	// Damage of the chassis. If the chassis takes too much damage it will break apart.
+	var/damageable = TRUE		// Whether this device(and, by effect, its hardware) can be damaged
 	var/damage = 0				// Current damage level
 	var/broken_damage = 50		// Damage level at which the computer ceases to operate
 	var/max_damage = 100		// Damage level at which the computer breaks apart.

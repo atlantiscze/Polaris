@@ -438,11 +438,6 @@
 				var/mob/living/silicon/ai/AI = usr
 				AI.toggle_camera_light()
 
-		if("Crew Monitoring")
-			if(isAI(usr))
-				var/mob/living/silicon/ai/AI = usr
-				AI.subsystem_crew_monitor()
-
 		if("Show Crew Manifest")
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr

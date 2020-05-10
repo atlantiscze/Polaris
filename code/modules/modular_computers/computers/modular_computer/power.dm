@@ -25,6 +25,8 @@
 // Tries to use power from APC, if present.
 /obj/item/modular_computer/proc/apc_power(var/power_usage = 0)
 	apc_powered = TRUE
+	if(!requires_power)
+		return TRUE
 	// Tesla link was originally limited to machinery only, but this probably works too, and the benefit of being able to power all devices from an APC outweights
 	// the possible minor performance loss.
 	if(!tesla_link || !tesla_link.check_functionality())

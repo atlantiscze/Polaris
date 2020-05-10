@@ -106,7 +106,9 @@
 			turn_on(user)
 
 /obj/item/modular_computer/attack_ai(var/mob/user)
-	return attack_self(user)
+	if(istype(src.loc, /obj/item/weapon/robot_module))
+		return ..(user)
+	return attack_hand(user)
 
 /obj/item/modular_computer/attack_hand(var/mob/user)
 	if(anchored)
@@ -141,12 +143,16 @@
 			return
 		nano_printer.attackby(W, user)
 	if(istype(W, /obj/item/weapon/computer_hardware))
+		if(!modifiable)
+			return
 		var/obj/item/weapon/computer_hardware/C = W
 		if(C.hardware_size <= max_hardware_size)
 			try_install_component(user, C)
 		else
 			to_chat(user, "This component is too large for \the [src].")
 	if(W.is_wrench())
+		if(!modifiable)
+			return
 		var/list/components = get_all_components()
 		if(components.len)
 			to_chat(user, "Remove all components from \the [src] before disassembling it.")
@@ -156,6 +162,8 @@
 		qdel(src)
 		return
 	if(istype(W, /obj/item/weapon/weldingtool))
+		if(!modifiable)
+			return
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.isOn())
 			to_chat(user, "\The [W] is off.")
@@ -172,6 +180,8 @@
 		return
 
 	if(W.is_screwdriver())
+		if(!modifiable)
+			return
 		var/list/all_components = get_all_components()
 		if(!all_components.len)
 			to_chat(user, "This device doesn't have any components installed.")

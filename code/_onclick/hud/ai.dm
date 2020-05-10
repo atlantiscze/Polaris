@@ -40,14 +40,11 @@
 	using.layer = SCREEN_LAYER
 	adding += using
 
-//Crew Monitoring
-	using = new /obj/screen()
-	using.name = "Crew Monitoring"
-	using.icon = 'icons/mob/screen_ai.dmi'
-	using.icon_state = "crew_monitor"
-	using.screen_loc = ui_ai_crew_monitor
-	using.layer = SCREEN_LAYER
-	adding += using
+//NTOS Computer
+	var/mob/living/silicon/ai/A = mymob
+	if(istype(A))
+		A.embedded_computer.screen_loc = ui_ai_crew_monitor
+		adding += A.embedded_computer
 
 //Crew Manifest
 	using = new /obj/screen()
